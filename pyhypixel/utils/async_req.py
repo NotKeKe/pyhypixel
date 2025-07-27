@@ -3,7 +3,7 @@ from typing import Union, List, Dict
 
 from ..types.err.error import req_error
 
-async def get(cls, url: str, params: dict) -> Union[Dict, List]:
+async def get(cls, url: str, params: dict = None) -> Union[Dict, List]:
     async with ClientSession() as session:
         async with session.get(url, params=params, headers=cls.headers) as resp:
             req_error(resp)

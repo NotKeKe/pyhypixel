@@ -18,7 +18,7 @@ def req_error(response: ClientResponse):
         wait_time = response.headers.get("RateLimit-Reset", "未知")
         raise TooManyRequests(f"速率限制已達上限，請等待 {wait_time} 秒")
     elif response.status == 404:
-        raise NotFound("指定玩家不存在")
+        raise NotFound("指定頁面不存在")
     elif response.status == 503:
         raise ServiceUnavailable("伺服器暫時無法使用，請稍候再試")
     else:

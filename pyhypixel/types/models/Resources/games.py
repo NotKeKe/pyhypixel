@@ -1,12 +1,14 @@
 from pydantic import BaseModel
-from typing import Dict, Optional
+from typing import Dict, Optional, Any
 
 class Game(BaseModel):
     id: int
     name: str
     databaseName: str
-    modeNames: Optional[Dict[str, str]]
-
+    modeNames: Optional[Dict[str, Any]] = None
+    legacy: Optional[bool] = None
+    retired: Optional[bool] = None
+    
     model_config = {
         "extra": "allow"
     }

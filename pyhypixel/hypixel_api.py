@@ -2,6 +2,7 @@ from aiohttp import ClientResponse
 from yarl import URL
 
 from .req.player_data import PlayerData
+from .req.resources import Resources
 from .interfaces.api import API
 
 class HypixelApi(API):
@@ -20,8 +21,16 @@ class HypixelApi(API):
         self.rate_reset = None # seconds untils next min for reset
 
         self.PlayerData = PlayerData(self)
+        self.Resources = Resources(self)
 
     def get_rate(self, resp: ClientResponse) -> None:
-        self.rate_limit = int(resp.headers.get('ratelimit-limit'))
-        self.rate_remain = int(resp.headers.get('ratelimit-remaining'))
-        self.rate_reset = int(resp.headers.get('ratelimit-reset'))
+        rate_limit = resp.headers.get('ratelimit-limit')
+        rate_remain = resp.headers.get('ratelimit-remaining')
+        rate_reset = resp.headers.get('ratelimit-reset')
+
+        if rate_limit is not None:
+            self.rate_limit = int(resp.headers.get('ratelimit-limit'))
+        if rate_remain is not None:
+            self.rate_remain = int(resp.headers.get('ratelimit-remaining'))
+        if rate_reset is not None:
+            self.rate_reset = int(resp.headers.get('ratelimit-reset'))

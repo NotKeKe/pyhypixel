@@ -16,9 +16,9 @@ params = {
 }
 
 def req():
-    resp = requests.get(f'{base_url}v2/guild', 
+    resp = requests.get(f'{base_url}v2/resources/vanity/companions', 
                         headers=headers,
-                        params=params
+                        # params=params
                     )
     with open('./test/test.json', mode='w', encoding='utf-8') as f:
         json.dump(resp.json(), f, ensure_ascii=False, indent=4)
@@ -30,9 +30,10 @@ def main():
     hyp = HypixelApi(KEY)
 
     async def main():
-        a = await hyp.PlayerData.guild(uuid=UUID3)
-        print(a.guild.name)
+        a = await hyp.Resources.vanity_champanions()
+        print('')
 
     asyncio.run(main())
 
+# req()
 main()

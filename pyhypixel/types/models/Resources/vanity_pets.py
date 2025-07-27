@@ -1,9 +1,19 @@
 from pydantic import BaseModel
-from typing import Any
+from typing import List, Optional
+
+class Types(BaseModel):
+    key: str
+    name: str
+    rarity: Optional[str]
+    package: str
+
+class Rarities(BaseModel):
+    name: str
+    color: str
 
 class VanityPets(BaseModel):
     '''`v2/resources/vanity/pets`'''
     success: bool
     lastUpdated: int
-    types: Any
-    rarities: Any
+    types: List[Types]
+    rarities: List[Rarities]
