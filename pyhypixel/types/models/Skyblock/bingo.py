@@ -1,12 +1,12 @@
 from pydantic import BaseModel
-from typing import List
+from typing import List, Optional
 
-class BingoEvent(BaseModel):
+class Event(BaseModel):
     key: int
     points: int
-    completed_goals: list[str]
+    completed_goals: List[str]
 
 class Bingo(BaseModel):
     '''Bingo data for participated events of the provided player.\n`v2/skyblock/bingo'''
     success: bool
-    event: List[BingoEvent]
+    events: List[Event]

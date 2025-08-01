@@ -3,6 +3,7 @@ from yarl import URL
 
 from .req.player_data import PlayerData
 from .req.resources import Resources
+from .req.skyblock import Skyblock
 from .interfaces.api import API
 
 class HypixelApi(API):
@@ -22,6 +23,7 @@ class HypixelApi(API):
 
         self.PlayerData = PlayerData(self)
         self.Resources = Resources(self)
+        self.Skyblock = Skyblock(self)
 
     def get_rate(self, resp: ClientResponse) -> None:
         rate_limit = resp.headers.get('ratelimit-limit')

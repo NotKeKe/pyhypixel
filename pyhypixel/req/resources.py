@@ -24,7 +24,6 @@ class Resources(API):
 
     async def games(self) -> Union[Games, ErrorResponse]:
         """Returns information about Hypixel Games.
-        api key is not required.
 
         Returns:
             Union[Games, ErrorResponse]

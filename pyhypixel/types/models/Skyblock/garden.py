@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Dict, Optional, List
+from typing import Dict, Optional, List, Union
 
 # composter_data
 class Upgrade(BaseModel):
@@ -7,7 +7,7 @@ class Upgrade(BaseModel):
     multi_drop: int
     fuel_cap: int
     organic_matter_cap: int
-    cost_reduction: int
+    cost_reduction: Optional[int] = None
 
 class ComposterData(BaseModel):
     organic_matter: float
@@ -16,7 +16,7 @@ class ComposterData(BaseModel):
     compost_items: int
     conversion_ticks: int
     last_save: int
-    upgrades: Optional[Upgrade]
+    upgrades: Optional[Union[Upgrade, Dict]] = None
 
 # active_commissions
 class Requirement(BaseModel):
@@ -30,16 +30,19 @@ class ActiveCommission(BaseModel):
     status: str
     position: int
 
+class GardenData(BaseModel):
+    uuid: str
+    unlocked_plots_ids: List[str]
+    commission_data: Dict[str, Union[Dict[str, int], int]]
+    resources_collected: Dict[str, int]
+    composter_data: ComposterData
+    active_commissions: Dict[str, ActiveCommission]
+    garden_experience: float
+    crop_upgrade_levels: Dict[str, int]
+    unlocked_barn_skins: List[str]
+    selected_barn_skin: str
+
 class Garden(BaseModel):
     '''SkyBlock garden data for the provided profile.\n`v2/skyblock/garden``'''
     success: bool
-    uuid: str
-    active_commissions: Dict[str, ActiveCommission]
-    commission_data: Dict[str, Dict[str, int]]
-    composter_data: ComposterData
-    resources_collected: Dict[str, int]
-    crop_upgrade_levels: Dict[str, int]
-    garden_experience: float
-    unlocked_plots_ids: List[str]
-    unlocked_barn_skins: List[str]
-    selected_barn_skin: str
+    garden: GardenData

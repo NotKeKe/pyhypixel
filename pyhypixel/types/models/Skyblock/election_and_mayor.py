@@ -1,16 +1,16 @@
 from pydantic import BaseModel
-from typing import List, Dict, Optional
+from typing import List, Optional
 
 class Perk(BaseModel):
     name: str
     description: str
-    minister: Optional[bool]
+    minister: Optional[bool] = None
 
 class Candidates(BaseModel):
     key: str
     name: str
     perks: List[Perk]
-    votes: int
+    votes: Optional[int] = None
 
 class Election(BaseModel):
     year: int

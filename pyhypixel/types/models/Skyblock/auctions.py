@@ -1,13 +1,6 @@
 from pydantic import BaseModel
 from typing import List
 
-class ItemBytes(BaseModel):
-    """
-    代表物品的二進位資料結構。
-    """
-    type: int
-    data: str
-
 class Bid(BaseModel):
     """
     代表一次競標的紀錄。
@@ -34,7 +27,7 @@ class Auction(BaseModel):
     category: str
     tier: str
     starting_bid: int
-    item_bytes: ItemBytes
+    item_bytes: str
     claimed: bool
     claimed_bidders: List[str]
     highest_bid_amount: int

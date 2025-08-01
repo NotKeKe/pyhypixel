@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List
+from typing import List, Optional
 
 class ItemBytes(BaseModel):
     """
@@ -22,6 +22,7 @@ class Item(BaseModel):
     """
     代表一個拍賣品的所有資訊。
     """
+    _id: str
     uuid: str
     auctioneer: str
     profile_id: str
@@ -31,7 +32,7 @@ class Item(BaseModel):
     item_name: str
     item_lore: str
     extra: str
-    category: str
+    category: Optional[str] = None
     tier: str
     starting_bid: int
     item_bytes: ItemBytes

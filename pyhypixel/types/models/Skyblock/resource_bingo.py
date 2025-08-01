@@ -4,11 +4,11 @@ from typing import List, Optional
 class Goal(BaseModel):
     id: str
     name: str
-    tiers: Optional[List[int]]
-    progress: Optional[int]
+    tiers: Optional[List[int]] = None
+    progress: Optional[int] = None
     lore: str
     fullLore: List[str]
-    requiredAmount: Optional[int]
+    requiredAmount: Optional[int] = None
 
 class ResourceBingo(BaseModel):
     '''Information regarding the current bingo event and its goals.\n`v2/resources/skyblock/bingo`'''
